@@ -6,6 +6,8 @@ import '../providers/movie_provider.dart';
 import '../widgets/movie_card.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final movieProvider = Provider.of<MovieProvider>(context);
