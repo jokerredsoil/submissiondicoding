@@ -2,7 +2,7 @@
 
 import 'dart:convert';
 import 'api_client.dart';
-import '../models/movie_model.dart';
+import 'package:submissiondicoding/models/movie_model.dart';
 
 class MovieService {
   final ApiClient apiClient;

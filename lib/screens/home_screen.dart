@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/movie_provider.dart';
-import '../widgets/movie_card.dart';
+import 'package:submissiondicoding/providers/movie_provider.dart';
+import 'package:submissiondicoding/widgets/movie_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

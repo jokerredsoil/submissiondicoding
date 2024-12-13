@@ -1,8 +1,8 @@
 // providers/movie_provider.dart
 
 import 'package:flutter/material.dart';
-import '../../services/movie_service.dart';
-import '../../models/movie_model.dart';
+import 'package:submissiondicoding/services/movie_service.dart';
+import 'package:submissiondicoding/models/movie_model.dart';
 
 class MovieProvider with ChangeNotifier {
   final MovieService movieService;
