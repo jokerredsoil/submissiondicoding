@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(title: Text('TMDB App')),
         body: Center(child: Text('Flutter DotEnv Example')),
-      ),
+      ), 
     );
   }
 }
