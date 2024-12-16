@@ -1,28 +1,42 @@
 // providers/movie_provider.dart
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:submissiondicoding/services/movie_service.dart';
-import 'package:submissiondicoding/models/movie_model.dart';
+import '../services/api_client.dart';
+import 'dart:convert';
 
-class MovieProvider with ChangeNotifier {
-  final MovieService movieService;
+class MovieProvider extends ChangeNotifier {
+  final ApiClient apiClient;
 
-  List<Movie> _movies = [];
-  List<Movie> get movies => _movies;
+  // List to store fetched movies
+  List<dynamic> _movies = [];
 
+  // Getter for movies
+  List<dynamic> get movies => _movies;
+
+  // Loading state
   bool _isLoading = false;
+
+  // Getter for loading state
   bool get isLoading => _isLoading;
 
-  MovieProvider(this.movieService);
+  MovieProvider({required this.apiClient});
 
-  Future<void> loadMovies() async {
+  // Method to fetch popular movies
+  Future<void> fetchPopularMovies() async {
     _isLoading = true;
     notifyListeners();
 
     try {
-      _movies = await movieService.fetchPopularMovies();
+      final response = await apiClient.get('/movie/popular');
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        _movies = data['results']; // Assuming TMDB API returns movies in `results`
+      } else {
+        throw Exception('Failed to load movies: ${response.statusCode}');
+      }
     } catch (error) {
-      print('Error loading movies: $error');
+      log('Error fetching movies: $error');
     } finally {
       _isLoading = false;
       notifyListeners();

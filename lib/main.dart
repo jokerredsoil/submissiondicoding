@@ -1,20 +1,25 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' show dotenv;
+import 'package:provider/provider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import './services/api_client.dart';
+import './providers/movie_provider.dart';
+import './screens/home_screen.dart';
 
-Future<void> main() async {
-  try {
-    await dotenv.load();
-    // Print loaded API key to debug
-    if (kDebugMode) {
-      print('API_KEY from .env: ${dotenv.env['API_KEY']}');
-    }
-    runApp(MyApp());
-  } catch (e) {
-    if (kDebugMode) {
-      print('Error loading .env file: $e');
-    }
+void main() async {
+  // Ensure Flutter framework is initialized before executing async code
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Load environment variables from .env file
+  await dotenv.load();
+
+  // Verify API key presence and log an error if missing
+  final apiKey = dotenv.env['API_KEY'];
+  if (apiKey == null || apiKey.isEmpty) {
+    debugPrint('Error: API_KEY is not set in the .env file.');
   }
+
+  // Run the app
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -22,11 +27,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: Text('TMDB App')),
-        body: Center(child: Text('Flutter DotEnv Example')),
-      ), 
+    return MultiProvider(
+      providers: [
+        // Register MovieProvider with ApiClient dependency
+        ChangeNotifierProvider(
+          create: (_) {
+            return MovieProvider(apiClient: ApiClient());
+          },
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Movie App',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: const HomeScreen(),
+      ),
     );
   }
 }
