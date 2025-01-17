@@ -1,3 +1,4 @@
+import 'package:submissiondicoding/models/movie_detail_model.dart';
 import 'package:submissiondicoding/models/movie_model.dart';
 import 'package:submissiondicoding/services/api_client.dart';
 
@@ -11,6 +12,13 @@ class MovieService {
     return (response['results'] as List)
         .map((movie) => Movie.fromJson(movie))
         .toList();
+  }
+
+  Future<MovieDetail> getMovieById({
+    required int id,
+  }) async {
+    final response = await apiClient.get('/movie/$id');
+    return MovieDetail.fromJson(response);
   }
 
   Future<void> addMovie(Movie movie) async {
