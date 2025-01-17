@@ -5,8 +5,8 @@ part 'movie_model.g.dart';
 @JsonSerializable()
 class Movie {
   final int id;
-  final String? title;
-  final String? overview;
+  final String title;
+  final String overview;
   final String? poster_path;
   final String? release_date ;
   final double? vote_average;

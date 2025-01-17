@@ -12,6 +12,8 @@ class MovieProvider with ChangeNotifier {
   List<Movie> get movies => _movies;
   List<Movie> get favoriteMovies => _favoriteMovies;
 
+ 
+
   Future<void> fetchMovies() async {
     try {
       _movies = await _movieService.fetchMovies();
@@ -22,14 +24,14 @@ class MovieProvider with ChangeNotifier {
     }
   }
 
-  void favoriteMovie(Movie movie) {
+  void addFavorite(Movie movie) {
     if (!_favoriteMovies.contains(movie)) {
       _favoriteMovies.add(movie);
       notifyListeners();
     }
   }
 
-  void removeFavoriteMovie(Movie movie) {
+  void removeFavorite(Movie movie) {
     _favoriteMovies.remove(movie);
     notifyListeners();
   }

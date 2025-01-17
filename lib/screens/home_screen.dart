@@ -50,19 +50,10 @@ class _HomeScreenState extends State<HomeScreen> {
               itemCount: provider.movies.length,
               itemBuilder: (context, index) {
                 final movie = provider.movies[index];
-                final isFavorite = provider.favoriteMovies
-                    .contains(movie); // Check if movie is a favorite
-
                 return MovieCard(
                   movie: movie,
-                  isFavorite: isFavorite, // Pass favorite status
-                  onFavoriteToggle: () {
-                    // Handle favorite toggle
-                    if (isFavorite) {
-                      provider.removeFavoriteMovie(movie);
-                    } else {
-                      provider.favoriteMovie(movie);
-                    }
+                  onDelete: () {
+                    provider.removeMovie(movie);
                   },
                 );
               },
