@@ -8,7 +8,7 @@ class FavoriteMoviesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final movieProvider = Provider.of<MovieProvider>(context);
+    Provider.of<MovieProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
