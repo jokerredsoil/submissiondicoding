@@ -8,8 +8,6 @@ class FavoriteMoviesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final movieProvider = Provider.of<MovieProvider>(context);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Favorite Movies'),
@@ -17,7 +15,12 @@ class FavoriteMoviesScreen extends StatelessWidget {
       body: Consumer<MovieProvider>(
         builder: (context, provider, child) {
           if (provider.favoriteMovies.isEmpty) {
-            return const Center(child: Text('No favorite movies yet.'));
+            return const Center(
+              child: Text(
+                'No favorite movies yet.',
+                style: TextStyle(fontSize: 18.0),
+              ),
+            );
           } else {
             return ListView.builder(
               itemCount: provider.favoriteMovies.length,

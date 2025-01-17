@@ -15,10 +15,10 @@ class MovieProvider with ChangeNotifier {
   Future<void> fetchMovies() async {
     try {
       _movies = await _movieService.fetchMovies();
-      print('Fetched movies: $_movies');  // Debug print
+      print('Fetched movies: $_movies'); // Debug print
       notifyListeners();
     } catch (error) {
-      print('Failed to fetch movies: $error');  // Debug print
+      print('Failed to fetch movies: $error'); // Debug print
     }
   }
 
@@ -51,10 +51,10 @@ class MovieProvider with ChangeNotifier {
         id: movie.id,
         title: newTitle,
         overview: movie.overview,
-        posterPath: movie.posterPath,
-        releaseDate: movie.releaseDate,
-        voteAverage: movie.voteAverage,
-        voteCount: movie.voteCount,
+        poster_path: movie.poster_path,
+        release_date: movie.release_date,
+        vote_average: movie.vote_average,
+        vote_count: movie.vote_count,
       );
       notifyListeners();
     }
