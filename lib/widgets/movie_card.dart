@@ -5,9 +5,16 @@ import 'package:submissiondicoding/screens/movie_detail_screen.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
-  final VoidCallback onDelete;
+  final bool isFavorite;
+  final VoidCallback onFavoriteToggle;
+ 
 
-  const MovieCard({super.key, required this.movie, required this.onDelete});
+  const MovieCard(
+      {super.key,
+      required this.movie,
+      required this.isFavorite,
+      required this.onFavoriteToggle,
+    });
 
   @override
   Widget build(BuildContext context) {
@@ -28,15 +35,17 @@ class MovieCard extends StatelessWidget {
           maxLines: 3,
           overflow: TextOverflow.ellipsis,
         ),
-        trailing: IconButton(
-          icon: Icon(Icons.favorite),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const FavoriteMoviesScreen()),
-            );
-          },
+        trailing: Row(
+          children: [
+            IconButton(
+              icon: Icon(
+                isFavorite ? Icons.favorite : Icons.favorite_border,
+                color: !isFavorite ? null : Colors.red,
+              ),
+              onPressed: onFavoriteToggle,
+            ),
+            
+          ],
         ),
         onTap: () {
           Navigator.push(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:submissiondicoding/models/movie_detail_model.dart';
 import 'package:submissiondicoding/services/api_client.dart';
 import 'package:submissiondicoding/services/movie_service.dart';

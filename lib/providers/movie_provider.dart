@@ -22,7 +22,7 @@ class MovieProvider with ChangeNotifier {
     }
   }
 
-  void addFavoriteMovie(Movie movie) {
+  void favoriteMovie(Movie movie) {
     if (!_favoriteMovies.contains(movie)) {
       _favoriteMovies.add(movie);
       notifyListeners();
