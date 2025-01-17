@@ -9,7 +9,11 @@ class MovieCard extends StatelessWidget {
   final VoidCallback onDelete;
   final bool isFavScreen;
 
-  const MovieCard({super.key, required this.movie, required this.onDelete,this.isFavScreen = false});
+  const MovieCard(
+      {super.key,
+      required this.movie,
+      required this.onDelete,
+      this.isFavScreen = false});
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +45,18 @@ class MovieCard extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
             trailing: IconButton(
-              icon: Icon( isFavScreen ? Icons.delete 
-              : isFavorite ? Icons.favorite : Icons.favorite_border,
-                color: isFavorite ? Colors.red : null,
+              icon: Icon(
+                isFavScreen
+                    ? Icons.delete
+                    : isFavorite
+                        ? Icons.favorite
+                        : Icons.favorite_border,
+                color: isFavScreen
+                    ? const Color.fromARGB(
+                        255, 5, 3, 3) 
+                    : isFavorite
+                        ? Colors.red
+                        : null,
               ),
               onPressed: () {
                 if (isFavorite) {
